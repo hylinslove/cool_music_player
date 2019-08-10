@@ -6,12 +6,10 @@ import 'package:cool_music_player/entity/songEntity.dart';
 class RequestUtil {
   static Future<List<BannerEntity>> getBannerData() async {
     Map<String, dynamic> data =
-        await HttpUtil.get("http://musicapi.leanapp.cn/banner");
+        await HttpUtil.get("http://musicapi.leanapp.cn/banner?type=1");
     if (data['msg'] == "success") {
       List listData = data['banners'];
-      print("遍历" + listData.toString());
       List<BannerEntity> banners = listData.map((s) {
-        print(s);
         return BannerEntity(
             picUrl: s['picUrl'],
             url: s['url'],
@@ -25,15 +23,13 @@ class RequestUtil {
     }
   }
 
-  static Future<List<PlayListEntity>> getPlayList() async {
-    Map<String, String> param = {'limit': '20', 'order': 'hot'};
+  static Future<List<PlayListEntity>> getPlayList(String type) async {
+    Map<String, String> param = {'limit': '30', 'order': type};
     Map<String, dynamic> data = await HttpUtil.get("musicapi.leanapp.cn",
         path: "/top/playlist", param: param);
     if (data['msg'] == "success") {
       List listData = data['playlists'];
-      print("遍历" + listData.toString());
       List<PlayListEntity> playList = listData.map((s) {
-        print(s);
         return PlayListEntity(
             coverImgUrl: s['coverImgUrl'].toString(),
             name: s['name'].toString(),
@@ -55,9 +51,7 @@ class RequestUtil {
         path: "/playlist/detail", param: param);
     if (data['msg'] == "success") {
       List listData = data['playlist']['tracks'];
-      print("遍历" + listData.toString());
       List<SongEntity> songList = listData.map((s) {
-        print(s);
         return SongEntity(
           id: s['id'].toString(),
           name: s['name'].toString(),

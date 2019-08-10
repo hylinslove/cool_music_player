@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'myPage.dart';
 import 'findPage.dart';
+import 'package:cool_music_player/widget/bottomPlayBar.dart';
+import 'package:cool_music_player/base/constant.dart';
+import 'package:cool_music_player/page/searchPage.dart';
 
 final List<String> tabTitles = <String>["我的", "发现"];
 
@@ -19,7 +23,17 @@ class _HomePageState extends State<HomePage> {
           title: TabLayout(),
           titleSpacing: 30 ,
           leading: Icon(Icons.music_note),
-          actions: <Widget>[Icon(Icons.search)],
+          actions: <Widget>[
+            IconButton(
+              icon:Icon(Icons.search),
+              onPressed: (){
+                Navigator.of(context).push(
+                    new CupertinoPageRoute(
+                        builder: (BuildContext context) => SearchPage())
+                );
+              },
+            ),
+          ],
         ),
         body: TabBarView(
           children: <Widget>[
@@ -27,9 +41,8 @@ class _HomePageState extends State<HomePage> {
             FindPage()
           ],
         ),
-        bottomNavigationBar: Container(
-          height: 70,
-          color: Colors.black,
+        bottomNavigationBar: BottomPlayBar(
+          playingEntity: Constant.playingEntity,
         ) ,
       ),
       length: tabTitles.length,

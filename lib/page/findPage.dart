@@ -18,6 +18,9 @@ class _FindPageState extends State<FindPage> with AutomaticKeepAliveClientMixin 
   List<BannerEntity> _banners;
   List<PlayListEntity> _playList;
 
+  Color labelColorNew = Constant.PINK;
+  Color labelColorHot = Colors.white70;
+
   @override
   void initState() {
     _banners = [
@@ -25,6 +28,7 @@ class _FindPageState extends State<FindPage> with AutomaticKeepAliveClientMixin 
     ];
     _playList = [];
     getBanner();
+    getPlayList('new');
     super.initState();
   }
 
@@ -39,10 +43,65 @@ class _FindPageState extends State<FindPage> with AutomaticKeepAliveClientMixin 
         children: <Widget>[
           BannerView(banners: _banners,),
           Container(margin:EdgeInsets.all(10), height: 0.5, ),
-          Text("  推荐歌单"),
-          Container(
-//            color: Colors.deepPurple,
+          Row(
+            children: <Widget>[
+              Text("  推荐歌单"),
+              GestureDetector(
+                onTap: (){
+                  if(labelColorNew != Constant.PINK) {
+                    labelColorNew = Constant.PINK;
+                    labelColorHot = Colors.white70;
+                    getPlayList('new');
+                  }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: labelColorNew,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(5))
+                  ),
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.fromLTRB(15,5,0,5),
+                  child:Text(
+                    " 最 新 ",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: labelColorNew,
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  if(labelColorHot != Constant.PINK) {
+                    labelColorHot = Constant.PINK;
+                    labelColorNew = Colors.white70;
+                    getPlayList('hot');
+                  }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: labelColorHot,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(5))
+                  ),
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.fromLTRB(15,5,0,5),
+                  child:Text(
+                    " 最 热 ",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: labelColorHot,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
 
+          Container(
             child: PlayListGridView(
               playList: _playList,
               onTap: (index) {
@@ -60,17 +119,19 @@ class _FindPageState extends State<FindPage> with AutomaticKeepAliveClientMixin 
 
   void getBanner() async {
 
-      print("update state");
       var newBanner = await RequestUtil.getBannerData();
       setState(() {
         _banners = newBanner;
       });
 
-      var newList = await RequestUtil.getPlayList();
-      setState(() {
-        _playList = newList;
-      });
 
+  }
+  void getPlayList(String type) async {
+
+    var newList = await RequestUtil.getPlayList(type);
+    setState(() {
+      _playList = newList;
+    });
   }
 
   @override

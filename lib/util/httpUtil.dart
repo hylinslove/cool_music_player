@@ -20,7 +20,7 @@ class HttpUtil {
 
       if (response.statusCode == HttpStatus.ok) {
         var jsonString = await response.transform(utf8.decoder).join();
-        print(jsonString);
+//        print(jsonString);
 
         result = json.decode(jsonString);
 
@@ -49,13 +49,12 @@ class HttpUtil {
 
       if (response.statusCode == HttpStatus.ok) {
         var jsonString = await response.transform(utf8.decoder).join();
-        print(jsonString);
+//        print(jsonString);
 
         result = json.decode(jsonString);
 
         result.putIfAbsent('msg',()=>"success");
 
-        print(result.toString());
       } else {
         result = {'msg': '网络连接失败'};
       }
