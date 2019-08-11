@@ -6,6 +6,7 @@ import 'package:cool_music_player/entity/songEntity.dart';
 import 'package:cool_music_player/util/requstUtil.dart';
 import 'package:cool_music_player/widget/bottomPlayBar.dart';
 import 'package:cool_music_player/entity/playingEntity.dart';
+import 'package:cool_music_player/widget/songListItem.dart';
 
 class PlayListPage extends StatefulWidget {
   final PlayListEntity playList;
@@ -112,58 +113,12 @@ class _PlayListPageState extends State<PlayListPage> {
                       itemCount: _songList.length,
                       itemBuilder: (context,index) {
 
-                        return InkWell(
-                          focusColor: Constant.PINK,
-                          splashColor: Constant.PINK,
-                          onTap: () {
+                        return SongListItem(
+                          songList: _songList,
+                          index: index,
+                          onTap: (){
                             playTheSong(_songList[index]);
-
                           },
-                          child: Container (
-
-                            padding: EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  width: 40,
-                                  child: Text(
-                                    index.toString(),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Constant.PINK,
-                                    ),
-                                  ),
-
-                                ),
-
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        _songList[index].name,
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color: Color(0xFFFFDDDD)
-                                        ),
-                                      ),
-                                      Text(
-                                        _songList[index].arName+"-"+_songList[index].alName,
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: Color(0xFFFFDDDD)
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
                         );
                       },
                     ),

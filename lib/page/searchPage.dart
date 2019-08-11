@@ -8,9 +8,19 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+
+  TextEditingController _controller =  TextEditingController();
+
+  @override
+  void initState() {
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Constant.MAIN,
       appBar: AppBar(
         centerTitle: true,
         title: Container(
@@ -22,8 +32,7 @@ class _SearchPageState extends State<SearchPage> {
           margin: EdgeInsets.fromLTRB(0, 0, 30, 0),
           child: TextField(
 
-            controller: TextEditingController(
-            ),
+            controller: _controller,
             focusNode: FocusNode(),
             style:TextStyle(
               color: Constant.MAIN,
@@ -34,9 +43,50 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
       body: Container(
-        color: Constant.MAIN,
-
+        padding: EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "热门搜索:",
+              style: TextStyle(
+                color: Constant.PINK,
+                fontSize: 18,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: <Widget>[
+                FlatButton(
+                  onPressed: ( ) {
+                    print("hahah");
+                  },
+                  highlightColor: Constant.PINK,
+                  textColor: Constant.PINK,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: Constant.PINK,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(8),),
+                  child: Text("来自天堂的魔鬼"),
+                ),
+                Text("cc"),
+                Text("adf"),
+                Text("adsfadfadf"),
+                Text("adfadf"),
+                Text("adfadf"),
+                Text("adsfadfadfadsf"),
+                Text("adsf"),
+                Text("adfasdfadsfasdfasdfasd"),
+              ],
+            )
+          ],
+        ),
       ),
+
       bottomNavigationBar: BottomPlayBar(
         playingEntity: Constant.playingEntity,
       ),

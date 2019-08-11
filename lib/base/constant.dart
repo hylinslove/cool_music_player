@@ -6,7 +6,7 @@ import 'package:cool_music_player/entity/songEntity.dart';
 
 class Constant{
   static const Color PINK = Color(0xFFE91E63);
-  static const Color MAIN = Color(0xCC000000);
+  static const Color MAIN = Color(0xFF2B2B2B);
 
   static double screenWidth ;
   static double screenHeight ;
