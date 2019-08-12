@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cool_music_player/entity/playListEntity.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PlayListGridView extends StatefulWidget {
   final List<PlayListEntity> playList;
@@ -37,6 +38,12 @@ class _PlayListGridViewState extends State<PlayListGridView> {
                             widget.playList[index].coverImgUrl,
                             fit: BoxFit.cover,
                           ),
+//                          CachedNetworkImage(
+//                            imageUrl:widget.playList[index].coverImgUrl,
+//                            placeholder: (context,s) => Icon(Icons.image),
+//                            errorWidget: (context,s,error) => Icon(Icons.error),
+//                            fit: BoxFit.cover,
+//                          ),
                         )
                     ),
                     Text(

@@ -18,8 +18,8 @@ class _FindPageState extends State<FindPage> with AutomaticKeepAliveClientMixin 
   List<BannerEntity> _banners;
   List<PlayListEntity> _playList;
 
-  Color labelColorNew = Constant.PINK;
-  Color labelColorHot = Colors.white70;
+  Color labelColorNew = Colors.white70;
+  Color labelColorHot = Constant.PINK;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _FindPageState extends State<FindPage> with AutomaticKeepAliveClientMixin 
     ];
     _playList = [];
     getBanner();
-    getPlayList('new');
+    getPlayList('hot');
     super.initState();
   }
 
@@ -46,32 +46,6 @@ class _FindPageState extends State<FindPage> with AutomaticKeepAliveClientMixin 
           Row(
             children: <Widget>[
               Text("  推荐歌单"),
-              GestureDetector(
-                onTap: (){
-                  if(labelColorNew != Constant.PINK) {
-                    labelColorNew = Constant.PINK;
-                    labelColorHot = Colors.white70;
-                    getPlayList('new');
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                        color: labelColorNew,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(5))
-                  ),
-                  padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.fromLTRB(15,5,0,5),
-                  child:Text(
-                    " 最 新 ",
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: labelColorNew,
-                    ),
-                  ),
-                ),
-              ),
               GestureDetector(
                 onTap: (){
                   if(labelColorHot != Constant.PINK) {
@@ -98,6 +72,33 @@ class _FindPageState extends State<FindPage> with AutomaticKeepAliveClientMixin 
                   ),
                 ),
               ),
+              GestureDetector(
+                onTap: (){
+                  if(labelColorNew != Constant.PINK) {
+                    labelColorNew = Constant.PINK;
+                    labelColorHot = Colors.white70;
+                    getPlayList('new');
+                  }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: labelColorNew,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(5))
+                  ),
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.fromLTRB(15,5,0,5),
+                  child:Text(
+                    " 最 新 ",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: labelColorNew,
+                    ),
+                  ),
+                ),
+              ),
+
             ],
           ),
 
