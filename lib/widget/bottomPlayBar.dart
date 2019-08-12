@@ -60,6 +60,7 @@ class _BottomPlayBarState extends State<BottomPlayBar> {
                   margin: EdgeInsets.all(5),
                   child: Text(widget.playingEntity.songEntity.name+
                       " -- "+widget.playingEntity.songEntity.arName,
+                      maxLines: 1,
                       style: TextStyle(
                         fontSize: 12,
                       )),

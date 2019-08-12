@@ -81,7 +81,7 @@ class _SplashPageState extends State<SplashPage> {
                 hitText,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: 12,
                     decoration: TextDecoration.none),
               ) ,
             ),

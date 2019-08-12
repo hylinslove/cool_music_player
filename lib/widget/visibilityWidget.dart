@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Visibility extends StatefulWidget {
+class VisibilityWidget extends StatefulWidget {
 
   static const int VISIBLE = 3;
   static const int INVISIBLE = 2;
@@ -11,21 +11,21 @@ class Visibility extends StatefulWidget {
   final Widget removeChild;
   final int visibility;
 
-  Visibility({this.child, this.removeChild, this.visibility});
+  VisibilityWidget({this.child, this.removeChild, this.visibility});
 
   @override
-  _VisibilityState createState() => _VisibilityState();
+  _VisibilityWidgetState createState() => _VisibilityWidgetState();
 }
 
-class _VisibilityState extends State<Visibility> {
+class _VisibilityWidgetState extends State<VisibilityWidget> {
   @override
   Widget build(BuildContext context) {
-    if (widget.visibility == Visibility.VISIBLE) {
+    if (widget.visibility == VisibilityWidget.VISIBLE) {
       return widget.child;
-    } else if (widget.visibility == Visibility.INVISIBLE) {
+    } else if (widget.visibility == VisibilityWidget.INVISIBLE) {
       return new IgnorePointer(
           ignoring: true, child: new Opacity(opacity: 0.0, child: widget.child));
-    } else if (widget.visibility == Visibility.OFFSCREEN) {
+    } else if (widget.visibility == VisibilityWidget.OFFSCREEN) {
       return new Offstage(offstage: true, child: widget.child);
     } else {
       return widget.removeChild;

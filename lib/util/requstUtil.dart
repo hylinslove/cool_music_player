@@ -67,4 +67,42 @@ class RequestUtil {
       return List();
     }
   }
+
+  static Future<List<String>> getHotWords() async {
+    Map<String, dynamic> data = await HttpUtil.get("http://musicapi.leanapp.cn/search/hot",);
+    if (data['msg'] == "success") {
+      List listData = data['result']['hots'];
+      List<String> wordList = listData.map((s) {
+        return s['first'].toString();
+      }).toList();
+
+      return wordList;
+    } else {
+      return List();
+    }
+  }
+
+
+  static Future<List<SongEntity>> getSearchResult(String keyWord) async {
+    Map<String, String> param = {'keywords': keyWord};
+    Map<String, dynamic> data = await HttpUtil.get("musicapi.leanapp.cn",
+        path: "/search/suggest", param: param);
+    if (data['msg'] == "success") {
+      List listData = data['result']['songs'];
+      List<SongEntity> songList = listData.map((s) {
+        return SongEntity(
+            id: s['id'].toString(),
+            name: s['name'].toString(),
+            alName: s['album']['name'].toString(),
+            arName: s['artists'][0]['name'].toString(),
+            picUrl: s['album']['img1v1Url'].toString()
+
+        );
+      }).toList();
+
+      return songList;
+    } else {
+      return List();
+    }
+  }
 }

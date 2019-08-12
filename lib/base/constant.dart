@@ -8,6 +8,8 @@ class Constant{
   static const Color PINK = Color(0xFFE91E63);
   static const Color MAIN = Color(0xFF2B2B2B);
 
+  static const Color TEXT_COLOR = Color(0xFFededed);
+
   static double screenWidth ;
   static double screenHeight ;
 
