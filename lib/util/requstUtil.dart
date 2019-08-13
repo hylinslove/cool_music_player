@@ -86,7 +86,7 @@ class RequestUtil {
   static Future<List<SongEntity>> getSearchResult(String keyWord) async {
     Map<String, String> param = {'keywords': keyWord};
     Map<String, dynamic> data = await HttpUtil.get("musicapi.leanapp.cn",
-        path: "/search/suggest", param: param);
+        path: "/search", param: param);
     if (data['msg'] == "success") {
       List listData = data['result']['songs'];
       List<SongEntity> songList = listData.map((s) {

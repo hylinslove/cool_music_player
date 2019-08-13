@@ -19,6 +19,8 @@ class _SearchPageState extends State<SearchPage> {
   List<SongEntity> _songList;
   int _isVisible = VisibilityWidget.VISIBLE;
 
+  var _scaffoldkey = new GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     _songList = [];
@@ -30,6 +32,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldkey,
       backgroundColor: Constant.MAIN,
       appBar: AppBar(
         centerTitle: true,
@@ -54,30 +57,35 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body:Column(
         children: <Widget>[
-//          VisibilityWidget(
-//            visibility: _isVisible,
-//            child: Container(
-//              padding: EdgeInsets.all(15),
-//              child: Column(
-//                crossAxisAlignment: CrossAxisAlignment.start,
-//                children: <Widget>[
-//                  Text(
-//                    "热门搜索:",
-//                    style: TextStyle(
-//                      color: Constant.PINK,
-//                      fontSize: 18,
-//                      fontStyle: FontStyle.italic,
-//                    ),
-//                  ),
-//                  Wrap(
-//                    spacing: 10,
-//                    runSpacing: 10,
-//                    children: _hotWords,
-//                  )
-//                ],
-//              ),
-//            ),
-//          ),
+          VisibilityWidget(
+            visibility: _isVisible,
+            removeChild: Container(
+              width: 0,
+              height: 0,
+            ),
+            child: Container(
+              width: Constant.screenWidth,
+              padding: EdgeInsets.all(15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "热门搜索:",
+                    style: TextStyle(
+                      color: Constant.PINK,
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: _hotWords,
+                  )
+                ],
+              ),
+            ),
+          ),
           Expanded(
             flex: 5,
             child:Container(
@@ -101,10 +109,21 @@ class _SearchPageState extends State<SearchPage> {
       ),
       floatingActionButton:FloatingActionButton(
         onPressed:() {
-          setState(() {
-            _isVisible = VisibilityWidget.INVISIBLE;
-          });
-          getSearchResult(_controller.text);
+          print(_controller.text);
+
+          if(_controller.text == null || _controller.text == "") {
+
+            var snackBar = SnackBar(content: Text("关键字不能为空 😊"));
+            _scaffoldkey.currentState.showSnackBar(snackBar);
+
+          } else {
+            FocusScope.of(context).requestFocus(FocusNode());
+            setState(() {
+              _isVisible = VisibilityWidget.GONE;
+            });
+            getSearchResult(_controller.text);
+          }
+
         },
         child: Icon(Icons.search),
 
