@@ -1,3 +1,4 @@
+import 'package:cool_music_player/util/dbUtil.dart';
 import 'package:flutter/material.dart';
 import 'page/homePage.dart';
 import 'dart:core';
@@ -45,7 +46,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-
+    DbUtil.instance;
     _getHit();
 
     Timer(Duration(seconds: seconds), () {

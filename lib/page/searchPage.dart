@@ -1,3 +1,4 @@
+import 'package:cool_music_player/util/dbUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:cool_music_player/widget/bottomPlayBar.dart';
 import 'package:cool_music_player/base/constant.dart';
@@ -146,6 +147,8 @@ class _SearchPageState extends State<SearchPage> {
     setState(() {
       Constant.playingEntity = playingEntity;
     });
+
+    DbUtil.instance.insert(songEntity.id, songEntity.name, songEntity.arName, songEntity.alName, songEntity.picUrl);
 
   }
 
