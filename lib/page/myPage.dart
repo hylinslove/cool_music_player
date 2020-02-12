@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:cool_music_player/base/constant.dart';
 
 class MyPage extends StatefulWidget {
+  final ValueChanged<PlayingEntity> onPlay;
+
+  MyPage({this.onPlay});
+
   @override
   _MyPageState createState() => _MyPageState();
 }
@@ -13,6 +17,7 @@ class MyPage extends StatefulWidget {
 class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin, WidgetsBindingObserver{
 
   List<SongEntity> _songList;
+
 
   @override
   void initState() {
@@ -75,9 +80,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin, Wid
       isPlaying: true,
       songEntity: songEntity,
     );
-    setState(() {
-      Constant.playingEntity = playingEntity;
-    });
+    widget.onPlay(playingEntity);
 
     DbUtil.instance.insert(songEntity.id, songEntity.name, songEntity.arName, songEntity.alName, songEntity.picUrl);
 

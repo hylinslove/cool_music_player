@@ -37,7 +37,11 @@ class _HomePageState extends State<HomePage> {
         ),
         body: TabBarView(
           children: <Widget>[
-            MyPage(),
+            MyPage(onPlay: (playingSong) {
+              setState(() {
+                Constant.playingEntity = playingSong;
+              });
+            },),
             FindPage()
           ],
         ),
